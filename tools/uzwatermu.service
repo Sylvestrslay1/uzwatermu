@@ -1,0 +1,25 @@
+[Unit]
+Description=UZWATERMU Telegram Bot (suv abonentlari)
+After=network-online.target
+Wants=network-online.target
+
+[Service]
+Type=simple
+User=uzwater
+Group=uzwater
+WorkingDirectory=/opt/uzwatermu
+ExecStart=/opt/uzwatermu/.venv/bin/python -m tools.bot_supervisor
+Restart=on-failure
+RestartSec=15
+TimeoutStopSec=30
+StandardOutput=journal
+StandardError=journal
+SyslogIdentifier=uzwatermu
+
+# Muhit o'zgaruvchilari — DPAPI Linux da ishlamaydi,
+# shuning uchun UZWATER_ENCRYPTION_PASSWORD va BOT_TOKEN
+# systemd credential yoki EnvironmentFile orqali beriladi.
+# EnvironmentFile=/etc/uzwatermu/secrets.env
+
+[Install]
+WantedBy=multi-user.target
