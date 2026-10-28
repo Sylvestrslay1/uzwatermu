@@ -24,6 +24,7 @@ class BotStorage:
     def __init__(self, path: str) -> None:
         self.path = Path(path)
         self.path.parent.mkdir(parents=True, exist_ok=True)
+        self._repairing = False
         self._init()
 
     @contextmanager
@@ -36,6 +37,18 @@ class BotStorage:
         try:
             yield db
             db.commit()
+        except sqlite3.OperationalError as error:
+            db.rollback()
+            if "no such table" in str(error) and not self._repairing:
+                # Baza fayli boshqa joyga ko'chirilgan, bo'sh nusxa bilan
+                # almashtirilgan yoki yarim tiklangan bo'lsa, sxema shu yerda
+                # avtomatik qayta tiklanadi (mavjud jadvallarga tegmaydi).
+                self._repairing = True
+                try:
+                    self._init()
+                finally:
+                    self._repairing = False
+            raise
         except Exception:
             db.rollback()
             raise
