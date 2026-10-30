@@ -20,7 +20,8 @@ Ishlab chiqish va sinov **test bot, test kanal va test guruh** bilan olib borila
 ## 0. Poydevor
 - Ma'lumotlar bazasini yangi qarorlarga moslash:
   - abonentlarning shaxsiy ma'lumotlari uchun jadval olib tashlanadi;
-  - quyidagilar uchun jadvallar qo'shiladi: rollar va ruxsatlar, taklif havolalari, ko'rsatkichlar navbati, murojaatlar, vazifalar, ommaviy xabarlar, sozlamalar, audit log.
+  - 0-bosqichda faqat ishlatiladigan jadvallar yaratiladi: foydalanuvchilar va rollar, hisob raqam bog'lanishlari, sozlamalar, audit log;
+  - ruxsatlar, taklif havolalari, navbat, murojaatlar, vazifalar va ommaviy xabarlar jadvallari o'z bosqichida alohida migratsiya (`0002_…`, `0003_…`) bilan qo'shiladi.
 - `.env`: test token, hisobot kanali, asosiy guruh, import papkasi, zaxira akkauntlar, maxfiy so'z xeshi.
 - `/start` bosilganda foydalanuvchi rolini aniqlash va kerakli panelga yo'naltirish.
 - Klaviatura asosi: matn yozilsa "Menyudan tanlang" javobi; har bir panelda `Sozlamalar → Til`.

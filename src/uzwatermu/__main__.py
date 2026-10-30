@@ -31,8 +31,16 @@ def main(argv: list[str]) -> int:
         except SchemaError as error:
             log.critical("%s", error)
             return 2
+        from uzwatermu.repositories.audit import AuditRepository
+        from uzwatermu.repositories.users import UserRepository
+        from uzwatermu.services.roles import ensure_main_admin
         from uzwatermu.telegram.app import build_bot
 
+        ensure_main_admin(
+            UserRepository(settings.database_path),
+            AuditRepository(settings.database_path),
+            settings.main_admin_id,
+        )
         bot = build_bot(settings)
         log.info("Bot ishga tushdi. DATA_DIR=%s", settings.var_dir)
         bot.infinity_polling(skip_pending=True)

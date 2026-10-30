@@ -11,24 +11,21 @@ PROJECT_ROOT = Path(__file__).resolve().parents[2]
 
 
 class Settings(BaseSettings):
+    """Faqat infratuzilma sozlamalari. Admin bot ichida o'zgartiradigan parametrlar
+    (limitlar, chegaralar, vaqtlar) `settings` jadvalida saqlanadi."""
+
     model_config = SettingsConfigDict(env_file=PROJECT_ROOT / ".env", extra="ignore")
 
     bot_token: str = Field(pattern=r"^\d{5,}:[A-Za-z0-9_-]{20,}$")
     report_channel_id: int
-    bootstrap_admin_ids: Annotated[set[int], NoDecode] = Field(min_length=1)
+    main_group_id: int | None = None
+    main_admin_id: int
+    backup_admin_ids: Annotated[set[int], NoDecode] = set()
+    emergency_phrase_hash: str | None = None
     data_dir: Path | None = None
-    enabled_modules: Annotated[set[str], NoDecode] = set()
+    import_dir: Path | None = None
 
-    user_request_limit: int = 15
-    staff_request_limit: int = 60
-    request_window_seconds: float = 10
-    flood_block_seconds: float = 60
-    max_meter_photos: int = Field(default=10, ge=1)
-    max_meter_photo_mb: float = Field(default=10, gt=0)
-    max_excel_upload_mb: float = Field(default=25, gt=0)
-    backup_keep_days: int = Field(default=30, ge=1)
-
-    @field_validator("bootstrap_admin_ids", "enabled_modules", mode="before")
+    @field_validator("backup_admin_ids", mode="before")
     @classmethod
     def _split_csv(cls, value: object) -> object:
         if isinstance(value, str):
@@ -36,6 +33,13 @@ class Settings(BaseSettings):
         if isinstance(value, int):
             return {value}
         return value
+
+    @field_validator(
+        "main_group_id", "data_dir", "import_dir", "emergency_phrase_hash", mode="before"
+    )
+    @classmethod
+    def _empty_is_none(cls, value: object) -> object:
+        return None if value == "" else value
 
     @cached_property
     def var_dir(self) -> Path:
@@ -55,9 +59,19 @@ class Settings(BaseSettings):
         return self.var_dir / "logs"
 
     @property
-    def import_dir(self) -> Path:
-        return self.var_dir / "imports"
+    def archive_dir(self) -> Path:
+        return self.var_dir / "archive"
+
+    @cached_property
+    def resolved_import_dir(self) -> Path:
+        return (self.import_dir if self.import_dir else self.var_dir / "import").resolve()
 
     def ensure_dirs(self) -> None:
-        for path in (self.database_path.parent, self.backup_dir, self.log_dir, self.import_dir):
+        for path in (
+            self.database_path.parent,
+            self.backup_dir,
+            self.log_dir,
+            self.archive_dir,
+            self.resolved_import_dir,
+        ):
             path.mkdir(parents=True, exist_ok=True)

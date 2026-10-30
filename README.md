@@ -3,8 +3,8 @@
 Mirzo Ulug'bek tumani abonentlari uchun hisoblagich ko'rsatkichlarini qabul qiluvchi
 Telegram bot — qayta loyihalangan versiya.
 
-**Avval o'qing:** `docs/01_REJA_VA_SPETSIFIKATSIYA.md` (reja, arxitektura, xavfsizlik)
-va `docs/02_V1_DAN_KOCHIRISH_XARITASI.md` (v1 kodining qaysi qismi qayerga boradi).
+**Avval o'qing:** `docs/03_KELISHILGAN_TALABLAR.md` (kelishilgan talablar — asosiy manba)
+va `docs/04_BOSQICHLAR.md` (ish bosqichlari).
 
 ## Ishni boshlash (Windows)
 
@@ -27,11 +27,10 @@ src/uzwatermu/
   logging_setup.py     log + tokenlarni yashirish filtri
   db/                  ulanish, migratsiya, migrations/*.sql
   repositories/        barcha SQL shu yerda
-  services/            biznes-qoidalar (Telegram'siz, testlanadi)
+  services/            biznes-qoidalar, rollar (Telegram'siz, testlanadi)
   security/            maskalash, rate limit, XLSX tekshiruvi, rol tekshiruvi
-  telegram/            bot, klaviaturalar, handlers/ (faqat UI)
+  telegram/            logic.py (suhbat mantig'i), menus.py (panellar), app.py (Telegram ulanishi)
   locales/             uz / uz_cyrl / ru matnlari
-  modules/             ixtiyoriy modullar (keyinroq)
 scripts/               backup va boshqa CLI vositalar
 deploy/                Windows (NSSM) va Linux (systemd) o'rnatish
 tests/
