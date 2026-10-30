@@ -1,5 +1,10 @@
 # uzwatermu v2 — qayta loyihalash rejasi va texnik spetsifikatsiya
 
+> ⚠️ **Eskirgan qismlari bor.** Keyingi muhokamalarda qabul qilingan qarorlar
+> `03_KELISHILGAN_TALABLAR.md` da. Ziddiyat bo'lsa, o'sha hujjat to'g'ri hisoblanadi.
+> Masalan, abonent ma'lumotlari endi bazada saqlanmaydi, faqat RAM'da turadi; inspektor
+> va live lokatsiya modullari asosiy funksiyalar tarkibiga kiradi.
+
 ## 0. Nima uchun qayta quramiz
 
 Joriy bot (v1) ishlaydi, lekin uch toifadagi muammo to'plangan:

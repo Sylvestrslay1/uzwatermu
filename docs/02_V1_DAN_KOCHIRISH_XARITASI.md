@@ -1,5 +1,10 @@
 # v1 kodini qayta tashkil qilish xaritasi
 
+> ⚠️ **Eskirgan qismlari bor.** Keyingi muhokamalarda qabul qilingan qarorlar
+> `03_KELISHILGAN_TALABLAR.md` da. Ziddiyat bo'lsa, o'sha hujjat to'g'ri hisoblanadi.
+> Masalan, abonent ma'lumotlari endi bazada saqlanmaydi, faqat RAM'da turadi; inspektor
+> va live lokatsiya modullari asosiy funksiyalar tarkibiga kiradi.
+
 v1 fayllarining har biri v2 da qayerga borishi (yoki ketishi). v1 kodidan nusxa
 olayotganda shu jadvalga qarang — qayta ishlatsa bo'ladigan yaxshi qismlar ham bor.
 
