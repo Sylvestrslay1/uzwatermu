@@ -268,7 +268,7 @@ Zaxira akkaunt: maxfiy so'z ──▶ bot xabarni o'chiradi ──▶ huquqli ak
 2. Operatorlarning qo'shimcha vazifalari.
 3. KPI ma'lumot manbai va fayl tuzilmasi.
 4. Reyting ball ulushlari.
-5. Murojaatga javob turi: erkin matn yoki tugma.
+5. ~~Murojaatga javob turi~~ — yopildi: avval erkin matn, keyinroq tayyor javob shablonlari.
 6. Excel fayllar ro'yxati va ularning ustunlari.
 7. Rahbariyat roli.
 8. Qo'llanma matnlarini kim yozadi.
