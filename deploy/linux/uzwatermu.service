@@ -1,0 +1,16 @@
+[Unit]
+Description=uzwatermu Telegram bot
+After=network-online.target
+
+[Service]
+User=uzwatermu
+WorkingDirectory=/opt/uzwatermu
+ExecStart=/opt/uzwatermu/.venv/bin/python -m uzwatermu run
+Restart=on-failure
+RestartSec=10
+NoNewPrivileges=true
+ProtectSystem=strict
+ReadWritePaths=/opt/uzwatermu/var
+
+[Install]
+WantedBy=multi-user.target
